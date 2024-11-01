@@ -10,10 +10,17 @@ return response.json();
 .then(products => {
 products.forEach(product => {
 const listItem = document.createElement('li');
-listItem.textContent = `${product.fields} - $${product.company}`;
+//Task3:Display Product Details Dynamically
+listItem.innerHTML = `<h1>${product.fields.name}</h2>
+<img src="${product.fields.image[0].url}" alt="${product.fields.name}">
+<p>Company: ${product.fields.company}</p>
+<p>Price: $${product.fields.price}</p>
+`;
+
 productList.appendChild(listItem);
 });
 })
+//Task4:Handle Errors Gracefully
 .catch(error => {
-console.error('There was a problem with the fetch operation:', error);
+console.error('Failed to load products. Please try again later.', error);
 });
